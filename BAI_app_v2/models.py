@@ -43,6 +43,7 @@ class Speed(models.Model):
     tenderPay = models.CharField(choices=yes_no,max_length=4,blank=False)
     suggest = models.TextField(max_length=100,blank=False)
     SpeedScale = models.TextField(max_length=100,blank=False)
+    category_latest = models.CharField(max_length=2,blank=True)
 
     def __str__(self):
         return self.users_name
@@ -55,6 +56,7 @@ class SafetynWellfare(models.Model):
     medical_aid = models.CharField(choices=yes_no,max_length=10,blank=False)
     incidents = models.CharField(choices=yes_no,max_length=10,blank=False)
     safety_audits = models.FileField(upload_to='uploads/',blank=True)
+    category_latest = models.CharField(max_length=2, blank=True)
 
     def __str__(self):
         return self.users_name
@@ -73,6 +75,7 @@ class Others(models.Model):
     green_building = models.TextField(max_length=2000,blank=True)
     debris_management = models.TextField(max_length=2000, blank=True)
     seminars = models.TextField(max_length=2000, blank=True)
+    category_latest = models.CharField(max_length=2, blank=True)
 
     def __str__(self):
         return self.users_name
@@ -97,6 +100,7 @@ class Economy(models.Model):
     cost_per_workstation=models.FloatField(blank=False)
     cost_per_similar=models.FloatField(blank=False)
     economy_ratings=models.TextField(blank=False,max_length=100)
+    category_latest = models.CharField(max_length=2, blank=True)
 
     def __str__(self):
         return self.users_name
@@ -133,6 +137,8 @@ class Project_info(models.Model):
     green_proj=models.CharField(max_length=1000, choices=yes_no,blank=True)
     green_project_details=models.FileField(upload_to="uploads/",blank=True)
 
+    category_latest = models.CharField(max_length=2, blank=True)
+
     def __str__(self):
         return self.users_name
 
@@ -161,6 +167,7 @@ class Quality(models.Model):
     Any_other_system_method_mechanism_adopted=models.CharField(max_length=1000, choices=yes_no,blank=True)
     system_method_mechanism_adopted=models.TextField(max_length=100,blank=True)
     rate_your_project_in_terms_of_quality=models.IntegerField(blank=False)
+    category_latest = models.CharField(max_length=2, blank=True)
 
     def __str__(self):
         return self.users_name
@@ -205,11 +212,13 @@ class PaymentDetails(models.Model):
     trans_date = models.CharField(max_length=20,blank=False)
     trans_id = models.CharField(max_length=30,blank=False)
     bank = models.CharField(max_length=50,blank=False)
+    category_latest = models.CharField(max_length=2, blank=True)
 
     def __str__(self):
         return self.users_name
 
-
-
+class UserCategory(models.Model):
+    users_name = models.CharField(max_length=20, blank=True)
+    category_latest = models.CharField(max_length=2, blank=True)
 
 

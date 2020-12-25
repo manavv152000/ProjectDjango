@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
-from BAI_app_v2.forms import ParticipantInfoForm,SignUpForm,SpeedForm,SafetynWellfareForm,OthersForm,EconomyForm,Project_infoForm,QualityForm,CategoryForm,PaymentDetailsForm
-
+from BAI_app_v2.forms import ParticipantInfoForm,SignUpForm,SpeedForm,SafetynWellfareForm,OthersForm,EconomyForm,Project_infoForm,QualityForm,CategoryForm,PaymentDetailsForm, UserCategoryForm
+from BAI_app_v2.models import UserCategory
 from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
 from django.http import HttpResponse,HttpResponseRedirect
 from django.urls import reverse
@@ -69,6 +69,8 @@ def signup(request):
             email.send(fail_silently=True)
 
             registered = True
+            UserCategory(users_name=user.username).save()
+
             messages.add_message(request, 40, 'Signup Successful!\nHead on to Logging In to fill the Application Form')
             return render(request, 'BAI_app_v2/signup.html', {'registered': registered})
         
@@ -96,6 +98,10 @@ def user_login(request):
         if user123 is not None:
             if user123.is_active:
                 login(request,user123)
+                obj = UserCategory.objects.all().filter(users_name=username)
+                if len(obj) == 0:
+                    UserCategory(users_name=username).save()
+
                 return render(request,'BAI_app_v2/user_landing.html',{'user123':user123})
 
             else:
@@ -127,7 +133,9 @@ def form0(request):
             category_cat1 = category_cat.save()
             category_cat1.users_name = request.user.username
             category_cat1.save()
-
+            obj = UserCategory.objects.filter(users_name=request.user.username)
+            obj.update(category_latest=category_cat1.app_form_cat)
+            obj[0].save()
             filled0 = True
 
         else:
@@ -153,9 +161,11 @@ def form1(request):
         quality_cat = QualityForm(request.POST,request.FILES)
         
         if speed_cat.is_valid() and project_info_cat.is_valid() and quality_cat.is_valid():
+            obj = UserCategory.objects.filter(users_name=request.user.username)
             speed_cat1 = speed_cat.save()
 
             speed_cat1.users_name = request.user.username
+            speed_cat1.category_latest = obj[0].category_latest
             speed_cat1.save()
 
             project_info_cat1 = project_info_cat.save(commit=False)
@@ -176,8 +186,9 @@ def form1(request):
                 quality_cat1.sample_test_reports = request.FILES['sample_test_reports']
 
             project_info_cat1.users_name = request.user.username
+            project_info_cat1.category_latest = obj[0].category_latest
             quality_cat1.users_name = request.user.username
-
+            quality_cat1.category_latest = obj[0].category_latest
             project_info_cat1.save()
             quality_cat1.save()
 
@@ -208,18 +219,20 @@ def form2(request):
         economy_cat = EconomyForm(request.POST)
 
         if safety_cat.is_valid() and others_cat.is_valid() and economy_cat.is_valid():
+            obj = UserCategory.objects.filter(users_name=request.user.username)
             economy_cat1 = economy_cat.save()
             safety_cat1 = safety_cat.save(commit=False)
             others_cat1 = others_cat.save(commit=False)
 
             economy_cat1.users_name = request.user.username
+            economy_cat1.category_latest = obj[0].category_latest
             economy_cat1.save()
 
             if 'safety_audits' in request.FILES:
                 safety_cat1.safety_audits = request.FILES['safety_audits']
 
             safety_cat1.users_name=request.user.username
-
+            safety_cat1.category_latest = obj[0].category_latest
             safety_cat1.save()
 
             others_cat1.accomodation = request.FILES['accomodation']
@@ -233,6 +246,7 @@ def form2(request):
                 others_cat1.renewable_energy_pic = request.FILES['renewable_energy_pic']            
 
             others_cat1.users_name=request.user.username
+            others_cat1.category_latest = obj[0].category_latest
             others_cat1.save()
 
             filled2 = True
@@ -263,8 +277,10 @@ def form3(request):
 
         payment_cat = PaymentDetailsForm(data=request.POST)
         if payment_cat.is_valid():
+            obj = UserCategory.objects.filter(users_name=request.user.username)
             payment_cat1 = payment_cat.save()
             payment_cat1.users_name = request.user.username
+            payment_cat1.category_latest = obj[0].category_latest
             payment_cat1.save()
 
             filled3 = True
