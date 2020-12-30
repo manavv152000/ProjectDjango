@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
-from BAI_app_v2.models import ParticipantInfo, Speed, SafetynWellfare, Others, Economy, Project_info, Quality, Category, PaymentDetails, UserCategory
+from BAI_app_v2.models import (ParticipantInfo, Speed, SafetynWellfare, Others, 
+                                Economy, Project_info, Project_info_1, Quality, 
+                                Category, PaymentDetails, UserCategory, JurySignup)
 
 class SignUpForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -50,7 +52,12 @@ class Project_infoForm(forms.ModelForm):
         fields = ('users_name','project_name','project_address','site_map','client_name','project_cost','applicant_role',
                 'applicant_scope','applicantWork_cost',#'time_limit',
                 'commencement_date','sched_completion_date',
-                'act_completion_date','proj_cost_tilldate','Architect_name','Structural_Consultant_name',
+                'act_completion_date','proj_cost_tilldate','category_latest')
+
+class Project_info_1Form(forms.ModelForm):
+    class Meta():
+        model = Project_info_1
+        fields = ('Architect_name','Structural_Consultant_name',
                 'Plumbing_Consultant_name','Fire_Consultant_name','Landscaping_Consultant_name','HVAC_Consultant_name',
                 'Electrical_Consultant_name','Interior_Designer_name','Project_Management_Consultant_name',
                 'MoEF_Consultant_name','req_docs','green_proj','green_project_details','category_latest')
@@ -80,3 +87,15 @@ class UserCategoryForm(forms.ModelForm):
     class Meta():
         model = UserCategory
         fields = ('users_name', 'category_latest')
+
+class JurySignUpForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta():
+        model = User
+        fields = ('first_name','last_name','username','password','email')
+
+class JuryInfoForm(forms.ModelForm):
+    class Meta():
+        model = JurySignup
+        fields = ('designation','firm_name','address','phone_number','allotted_cat')

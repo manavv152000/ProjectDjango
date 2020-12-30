@@ -14,21 +14,23 @@
             </div>
             {% if registered %}
 
+            <script>alert("An Email is sent for Verification. Please check email for further details.\nPossible reasons for not receiving email:\n1. Email-id wrongly entered.\n2. Check SPAM folder for mail.")</script>
+
             <div class="col-md-6 mt-5 jumbotron">
               <div class="alert alert-success mt-5" role="alert">
-                {% if messages %}
                   <ul class="messages my-4">
-                    {% for message in messages %}
-                      <li class="h4">{{ message }}</li>
-                    {% endfor %}
+                      <li class="h4">Thank You! for signing-up with BAI.</li>
+                      <li class="h4">Please check email sent on {{request.user.email}} for Account Verification.</li>
+                      <li class="h4">After completing Verification you can LogIn to your Account!</li>
                   </ul>
-                  <script>alert("Signup Successful!\nHead on to Logging In to fill the Application Form")</script>
-                {% endif %}
               </div>
               <div class="container mt-5">
-                <button class="btn btn-primary my-4"><a href="{% url 'BAI_app_v2:user_login' %}" class="white-text">Log In</a></button>
+                <form action="{% url 'BAI_app_v2:user_login' %}">
+                  <button class="btn btn-primary my-4 white-text">Log In</button>
+                </form>
               </div>
-          </div>
+            </div>
+
             
             {% else %} 
 
@@ -55,7 +57,8 @@
             
                 <input type="number" id="defaultRegisterPhonePassword" class="form-control mb-4" name="ph_no" placeholder="Phone number" aria-describedby="defaultRegisterFormPhoneHelpBlock" required>
             
-                <input class="form-control mb-4" id="emailInput" type="email" name="email" placeholder="Email " required>
+                <input class="form-control" id="emailInput" type="email" name="email" placeholder="Email " aria-describedby="defaultRegisterFormPasswordHelpBlock1" required>
+                <small id="defaultRegisterFormPhoneHelpBlock1" class="form-text text-muted mb-4">An e-mail will be sent for Verification</small>
             
                 <input type="password" id="defaultRegisterFormPassword" class="form-control" name="password" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" required>
             
@@ -65,8 +68,8 @@
                 {% if error %}
                   <script> alert(" {{error}} ")</script>
                 {% endif %}
-                {{signup_form.errors}}
-                {{participant_form.errors}}
+                <!-- {{signup_form.errors}}
+                {{participant_form.errors}} -->
                 <button class="btn btn-info my-4 btn-block" type="submit" value="Register">Sign up</button>
                 
                 <div class="text-center">
