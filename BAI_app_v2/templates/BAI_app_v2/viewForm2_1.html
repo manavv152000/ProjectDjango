@@ -1,5 +1,7 @@
 {% extends "BAI_app_v2/base.html" %}
 {% block body_block %}
+{% load static %}
+
 
     <div class="container">
       <!-- Horizontal Steppers -->
@@ -48,9 +50,9 @@
                 <div class="col-3">
                   <div class="sticky-top">
                     <div id="list-example" class="list-group">
-                      <a class="list-group-item list-group-item-action" href="#list-item-1">Economy</a>
-                      <a class="list-group-item list-group-item-action" href="form 2-2.html">Safety/Welfare</a>
-                      <a class="list-group-item list-group-item-action" href="form 2-3.html">Others</a>
+                      <a class="list-group-item list-group-item-action" href="{% url 'BAI_app_v2:viewForm2_1' Economy.users_name cat_id %}">Economy</a>
+                      <a class="list-group-item list-group-item-action" href="{% url 'BAI_app_v2:viewForm2_2' Economy.users_name cat_id %}">Safety/Welfare</a>
+                      <a class="list-group-item list-group-item-action" href="{% url 'BAI_app_v2:viewForm2_3' Economy.users_name cat_id %}">Others</a>
                     </div>
                   </div>
                 </div>
@@ -61,62 +63,70 @@
                     </h4>
                     <!--step 2-1-->
                     <div>
-                      <form class="border border-light p-5">
-
-                        <p class="h4 mb-4 text-center">Economy</p>
+                      <form class="border border-light p-5" action="{% url 'BAI_app_v2:viewForm2_2' Economy.users_name cat_id %}">
+                        <p class="h4 text-center">Economy</p>
                         <p class="mb-4 text-center">Builder / Contractor(Fill relevant information)</p>
+                        <p class="h4 text-center">User: {{Economy.users_name}}</p>
+                        <p class="h4 mb-2 text-center">Category: {{Economy.category_latest}}</p>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>1. In case of a Tender, what was the project cost as
                                 per the contract? *</b></label><br>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.project_cost}}</p>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>2. If not, who determined the Estimated Project Cost? *</b></label><br>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.who_determined}}</p>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>3. Were the drawings, specifications and techniques
                                 assessed in terms of possible cost reduction? *</b></label>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.cost_reduction}}</p>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>4. Was the project being tracked in terms of cost
                                 during progress of work?</b></label>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.tracked_e}}</p>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>If yes, by whom? *</b></label><br>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.who_tracked}}</p>
                           </div>
                         </div>
+                        <hr>
 
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>5. Was there a separate PMC appointed?</b></label>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.PMC_appointed}}</p>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>6. What was the Expected cost of completion of the
@@ -124,10 +134,11 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.expected_cost}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>7. What was the actual cost of completion of the
@@ -135,10 +146,11 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.actual_cost}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
 
                         <div class="form-row">
                           <div class="col-9">
@@ -146,18 +158,20 @@
                                 that resulted in cost escalation of work?</b></label>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.difficulty_e}}</p>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>If yes, how much escalation would you attribute on
                                 that account?</b></label><br>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.escalated}}</p>
                           </div>
                         </div>
+                        <hr>
 
                         <div class="form-row">
                           <div class="col-9">
@@ -166,10 +180,11 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.costsaving_measures}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>10. Enlist any suggestions made by you to the client
@@ -177,10 +192,11 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.suggestions}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
                         <label><b>11. Cost of project per: *</b></label><br>
                         <div class="form-row">
                           <div class="col-9">
@@ -188,50 +204,55 @@
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.cost_per_sft}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>&emsp;Room, in case of hotel </b></label><br>
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.cost_per_room}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>&emsp;Bed, in case of hospital</b></label><br>
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.cost_per_bed}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>&emsp;Workstation, in case of office</b></label><br>
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.cost_per_workstation}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
                         <div class="form-row">
                           <div class="col-9">
                             <label for="textInput"><b>&emsp;Similar</b></label><br>
                           </div>
                           <div class="col-3">
                             <div class="md-form mt-0">
-                              {{}}
+                              <p class="h5">{{Economy.cost_per_similar}}</p>
                             </div>
                           </div>
                         </div>
+                        <hr>
 
                         <div class="form-row">
                           <div class="col-9">
@@ -240,10 +261,11 @@
                                 (1: Lowest, 10:Highest) *</b></label><br>
                           </div>
                           <div class="col-3">
-                            {{}}
+                            <p class="h5">{{Economy.economy_ratings}}</p>
                           </div>
                         </div>
-                        <button class="btn btn-info my-4 btn-block" type="button" onclick="window.location.href='form 2-2.html'">Next</button>
+                        <hr>
+                        <button class="btn btn-info my-4 btn-block" type="submit">Next</button>
                         <!--<button class="btn btn-info my-4 btn-block" type="button" onclick="window.location.href='steps.html'">Next</button>-->
                       </form>
                     </div>
@@ -261,3 +283,4 @@
   </div>
 
 {% endblock %}
+

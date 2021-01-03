@@ -1,5 +1,7 @@
 {% extends "BAI_app_v2/base.html" %}
 {% block body_block %}
+{% load static %}
+
 
     <div class="container mt-5">
         <div class="row">
@@ -55,7 +57,7 @@
                     <label for="textInput6">Email</label>
                   </div>
                   <div class="md-form">
-                    <input type="password" id="textInput7" class="form-control mb-4" name="password">
+                    <input type="password" id="textInput7" class="form-control mb-4" name="password" value="Jury1234" readonly >
                     <label for="textInput7">Password</label>
                   </div>
                   <small id="defaultRegisterFormPhoneHelpBlock" class="form-text text-muted mb-4">Minimal 8 characters

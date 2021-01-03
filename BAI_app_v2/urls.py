@@ -34,14 +34,29 @@ urlpatterns = [
     path('view_jury/',views.view_jury,name="view_jury"),
 
     path('viewForm1_1/<user>/<int:cat_id>',views.viewForm1_1,name="viewForm1_1"),
-    # path('viewForm1_2/<user>/<cat>',views.viewForm1_2,name="viewForm1_2"),
-    # path('viewForm1_3/<user>/<cat>',views.viewForm1_3,name="viewForm1_3"),
-    # path('viewForm1_4/<user>/<cat>',views.viewForm1_4,name="viewForm1_4"),
-    # path('viewForm2_1/<user>/<cat>',views.viewForm2_1,name="viewForm2_1"),
-    # path('viewForm2_2/<user>/<cat>',views.viewForm2_2,name="viewForm2_2"),
-    # path('viewForm2_3/<user>/<cat>',views.viewForm2_3,name="viewForm2_3"),
-    # path('viewForm3/<user>/<cat>',views.viewForm3,name="viewForm3"),
+    path('viewForm1_2/<user>/<int:cat_id>',views.viewForm1_2,name="viewForm1_2"),
+    path('viewForm1_3/<user>/<int:cat_id>',views.viewForm1_3,name="viewForm1_3"),
+    path('viewForm1_4/<user>/<int:cat_id>',views.viewForm1_4,name="viewForm1_4"),
+    path('viewForm2_1/<user>/<int:cat_id>',views.viewForm2_1,name="viewForm2_1"),
+    path('viewForm2_2/<user>/<int:cat_id>',views.viewForm2_2,name="viewForm2_2"),
+    path('viewForm2_3/<user>/<int:cat_id>',views.viewForm2_3,name="viewForm2_3"),
+    path('viewForm3/<user>/<int:cat_id>',views.viewForm3,name="viewForm3"),
 
     path('AcceptForm/<user>/<int:cat_id>',views.AcceptForm,name="AcceptForm"),
     path('RejectForm/<user>/<int:cat_id>',views.RejectForm,name="RejectForm"),
+
+    path('updateform0/<user>/<int:cat_id>',views.updateform0,name="updateform0"),
+    path('updateform1_1/<user>/<int:cat_id>',views.updateform1_1,name="updateform1_1"),
+    path('updateform1_2/<user>/<int:cat_id>',views.updateform1_2,name="updateform1_2"),
+    path('updateform1_3/<user>/<int:cat_id>',views.updateform1_3,name="updateform1_3"),
+    path('updateform1_4/<user>/<int:cat_id>',views.updateform1_4,name="updateform1_4"),
+    path('updateform2_1/<user>/<int:cat_id>',views.updateform2_1,name="updateform2_1"),
+    path('updateform2_2/<user>/<int:cat_id>',views.updateform2_2,name="updateform2_2"),
+    path('updateform2_3/<user>/<int:cat_id>',views.updateform2_3,name="updateform2_3"),
+    path('updateform3/<user>/<int:cat_id>',views.updateform3,name="updateform3"),
+
+    path('update_view/',views.update_view,name="update_view"),
+    path('show_updateform0/<user>/<int:cat_id>',views.show_updateform0,name="show_updateform0"),
+
+
 ]
